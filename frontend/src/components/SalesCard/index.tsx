@@ -1,27 +1,36 @@
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import { useState } from "react"
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
 
 import NotificationButton from '../NotificationButton'
 import './styles.css'
-
+//react hook está ganchado com o componente, useState guarda o estado do componente
 function SalesCard() {
+
+    const min = new Date(new Date().setDate(new Date().getDate() - 365));
+    const max = new Date()
+
+    const [minDate, setMinDate] = useState(min)
+    const [maxDate, setMaxDate] = useState(max)
+
     return ( //<> serve para retornar mais de uma tag
+    //para alterar o visual do datapicker, você deve também alterar o dado
         <>
             <div className="dsmeta-card">
                 <h2 className="dsmeta-sales-title">Vendas</h2>
                 <div>
                     <div className="dsmeta-form-control-container">
                         <DatePicker
-                            selected={new Date()} 
-                            onChange={(date: Date) => { }}
+                            selected={minDate} //selected é o parâmetro que recebe o valor da data atual
+                            onChange={(date: Date) => setMinDate(date)} //altera o estado do componente (useState) e o visual irá mudar
                             className="dsmeta-form-control"
                             dateFormat="dd/MM/yyyy"
                         />
                     </div>
                     <div className="dsmeta-form-control-container">
                         <DatePicker
-                            selected={new Date()}
-                            onChange={(date: Date) => { }}
+                            selected={maxDate}
+                            onChange={(date: Date) => setMaxDate(date)}
                             className="dsmeta-form-control"
                             dateFormat="dd/MM/yyyy"
                         />
